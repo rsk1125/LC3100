@@ -150,10 +150,7 @@ main(int argc, char *argv[])
     
     for (address=0; readAndParse(inFilePtr, label, opcode, arg0, arg1, arg2);
 	    address++) {
-	/*
-	printf("%d: label=%s, opcode=%s, arg0=%s, arg1=%s, arg2=%s\n",
-	    address, label, opcode, arg0, arg1, arg2);
-	*/
+	
 
 	/* check for illegal opcode */
 	if (strcmp(opcode, "add") && strcmp(opcode, "nand") &&
@@ -239,8 +236,7 @@ main(int argc, char *argv[])
 	/* printf("%s = %d\n", labelArray[i], labelAddress[i]); */
     }
 
-    /* now do second pass (print machine code, with symbols filled in as
-	addresses) */
+   
     rewind(inFilePtr);
     for (address=0; readAndParse(inFilePtr, label, opcode, arg0, arg1, arg2);
 	    address++) {
@@ -262,9 +258,7 @@ main(int argc, char *argv[])
 	    if (!isNumber(arg2)) {
 		addressField = translateSymbol(labelArray, labelAddress,
 					    numLabels, arg2);
-		/*
-		printf("%s being translated into %d\n", arg2, addressField);
-		*/
+		
 		if (!strcmp(opcode, "beq")) {
 		    addressField = addressField-address-1;
 		}
@@ -302,7 +296,7 @@ main(int argc, char *argv[])
 		num = atoi(arg0);
 	    }
 	}
-	/* printf("(address %d): %d (hex 0x%x)\n", address, num, num); */
+	
 	fprintf(outFilePtr, "%d\n", num);
     }
 
